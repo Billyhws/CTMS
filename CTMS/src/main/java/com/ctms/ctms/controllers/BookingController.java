@@ -33,6 +33,10 @@ public class BookingController {
     public ResponseEntity<Booking> updateReviewHandler(@PathVariable("id") Long id , @RequestBody Booking book) {
         return new ResponseEntity<>(bookingService.updateBook(id,book), HttpStatus.OK);
     }
+    @PutMapping("/book/{id}")
+    public ResponseEntity<Booking> checkReviewHandler(@PathVariable("id") Long id , @RequestBody BookingStatus book) {
+        return new ResponseEntity<>(bookingService.checkBook(id,book), HttpStatus.OK);
+    }
 
     @GetMapping("/booking/{tripId}")
     public ResponseEntity<List<Booking>> getAllBooksOfTripHandler(@PathVariable Long tripId){
