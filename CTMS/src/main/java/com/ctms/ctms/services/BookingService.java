@@ -28,6 +28,12 @@ public class BookingService {
 
         return bookingRepo.save(book1);
     }
+    public Booking checkBook(Long id, BookingStatus status) {
+        Booking book1 = bookingRepo.findById(id)
+                .orElseThrow(() -> new BookNotFoundException("Trip with ID " + id + " not found"));
+        book1.setStatus(status);
+        return bookingRepo.save(book1);
+    }
 
     public String deleteBook(Long id) {
 
