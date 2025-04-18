@@ -6,29 +6,31 @@ import com.ctms.ctms.models.Trip;
 import com.ctms.ctms.repositories.TripRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class TripService {
-    /*
+
     @Autowired
     private TripRepo tripRepo;
 
 
-    public Trip addTrip(String token) {
-        Trip trip = new Trip();//agencyService.getCurrentlyLoggedInAgency(token); // will throw if not found
-
+    public Trip addTrip(Trip trip) {
         return tripRepo.save(trip);
-
     }
 
-    public Trip updateTrip(Long id){
-        Trip trip = tripRepo.findById(id)
+    public Trip updateTrip(Long id,Trip trip) {
+        Trip trip1 = tripRepo.findById(id)
                 .orElseThrow(() -> new TripNotFoundException("Trip with ID " + id + " not found"));
-
-
-
+        trip1.setItinerary(trip.getItinerary());
+        trip1.setAvailableSlots(trip.getAvailableSlots());
+        trip1.setPrice(trip.getPrice());
+        trip1.setTripDate(trip.getTripDate());
+        trip1.setLocation(trip.getLocation());
         return tripRepo.save(trip);
     }
 
@@ -41,7 +43,7 @@ public class TripService {
     }
 
     public List<Trip> getAllTripsOfAgency(Long id) {
-        List<Trip> trips = tripRepo.findAllByAgencyId(id);
+        List<Trip> trips = tripRepo.findAllByAgency_id(id);
         if (trips.isEmpty()) {
             throw new TripNotFoundException("No trips found for agency ID: " + id);
         }
@@ -72,11 +74,11 @@ public class TripService {
         return trips;
     }
 
-    public List<Trip> getTripsByTripDate(Date date) {
+    public List<Trip> getTripsByTripDate(LocalDate date) {
         List<Trip> trips = tripRepo.findAllByTripDate(date);
         if (trips.isEmpty()) {
             throw new TripNotFoundException("No trips found on date: " + date);
         }
         return trips;
-    }*/
+    }
 }

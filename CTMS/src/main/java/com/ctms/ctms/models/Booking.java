@@ -22,12 +22,14 @@ public class Booking {
     private BookingStatus status = BookingStatus.PENDING;
 
     @ManyToOne
-    @JoinColumn(name = "trip_id")
+    @JoinColumn(name = "trip_id",insertable=false, updatable=false)
     @JsonIgnore
     private Trip trip;
+    private Long trip_id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id",insertable=false, updatable=false)
     @JsonIgnore
     private Customer customer;
+    private Long customer_id;
 }

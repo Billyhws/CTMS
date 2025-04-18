@@ -2,9 +2,7 @@ package com.ctms.ctms.services;
 
 import com.ctms.ctms.exception.TripNotFoundException;
 import com.ctms.ctms.models.Review;
-import com.ctms.ctms.models.Trip;
 import com.ctms.ctms.repositories.ReviewRepo;
-import com.ctms.ctms.repositories.TripRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,20 +10,13 @@ import java.util.List;
 
 @RestController
 public class ReviewService {
-/*
+
     @Autowired
     private ReviewRepo reviewRepo;
 
 
-    public Review addReview(Long tripId, Review review) {
-
-        Review review1 = new Review();
-        review1.setReviewDate(review.getReviewDate());
-        review1.setTrip(review.getTrip());
-        review1.setComment(review.getComment());
-        review1.setRating(review.getRating());
-
-        return reviewRepo.save(review1);
+    public Review addReview(Review review) {
+        return reviewRepo.save(review);
     }
 
     public Review updateReview(Long id, Review review) {
@@ -35,7 +26,7 @@ public class ReviewService {
         review1.setReviewDate(review.getReviewDate());
         review1.setComment(review.getComment());
         review1.setRating(review.getRating());
-
+        review1.setTrip_id(review.getTrip_id());
 
         return reviewRepo.save(review1);
     }
@@ -50,7 +41,7 @@ public class ReviewService {
     }
 
     public List<Review> getAllReviewOfTrip(Long id) {
-        List<Review> reviews = reviewRepo.findAllByTripId(id);
+        List<Review> reviews = reviewRepo.findAllByTrip_id(id);
         if (reviews.isEmpty()) {
             throw new TripNotFoundException("No trips found for agency ID: " + id);
         }
@@ -58,10 +49,10 @@ public class ReviewService {
     }
 
     public List<Review> getAllReviewOfCustomer(Long id) {
-        List<Review> reviews = reviewRepo.findAllByCustomerId(id);
+        List<Review> reviews = reviewRepo.findAllByCustomer_id(id);
         if (reviews.isEmpty()) {
             throw new TripNotFoundException("No trips found for agency ID: " + id);
         }
         return reviews;
-    }*/
+    }
 }

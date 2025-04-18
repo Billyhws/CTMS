@@ -10,13 +10,13 @@ import java.util.List;
 
 @RestController
 public class ReviewController {
-    /*
+
     @Autowired
     private ReviewService reviewService;
 
     @PostMapping("/reviews")
-    public ResponseEntity<Review> addReviewHandler(@PathVariable Long tripId ,@RequestBody Review review) {
-        return new ResponseEntity<>(reviewService.addReview(tripId,review), HttpStatus.CREATED);
+    public ResponseEntity<Review> addReviewHandler(@RequestBody Review review) {
+        return new ResponseEntity<>(reviewService.addReview(review), HttpStatus.CREATED);
     }
 
     @PutMapping("/review/{id}")
@@ -29,13 +29,13 @@ public class ReviewController {
         return new ResponseEntity<>(reviewService.deleteReview(id), HttpStatus.OK);
     }
 
-    @GetMapping("/reviews")
+    @GetMapping("/trip/reviews/{tripId}")
     public ResponseEntity<List<Review>> getAllReviewOfTripHandler(@PathVariable Long tripId){
         return new ResponseEntity<>(reviewService.getAllReviewOfTrip(tripId), HttpStatus.OK);
     }
 
-    @GetMapping("/reviews")
-    public ResponseEntity<List<Review>> getAllReviewOfCustomerHandler(@PathVariable Long tripId){
-        return new ResponseEntity<>(reviewService.getAllReviewOfCustomer(tripId), HttpStatus.OK);
-    }*/
+    @GetMapping("/customer/reviews/{customerId}")
+    public ResponseEntity<List<Review>> getAllReviewOfCustomerHandler(@PathVariable Long customerId){
+        return new ResponseEntity<>(reviewService.getAllReviewOfCustomer(customerId), HttpStatus.OK);
+    }
 }

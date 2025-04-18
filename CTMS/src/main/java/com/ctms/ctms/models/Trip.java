@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -34,12 +36,12 @@ public class Trip {
     private Integer availableSlots;
 
     @Column(name = "trip_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime tripDate ;
+    private LocalDate tripDate ;
 
     @ManyToOne()
-    @JoinColumn(name = "agency_id")
+    @JoinColumn(name = "agency_id",insertable=false, updatable=false)
     private Agency  agency;
+    private  Long agency_id;
 
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
     @JsonIgnore

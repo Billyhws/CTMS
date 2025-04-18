@@ -17,7 +17,7 @@ public class Message {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private message_type type;
+    private message_type sender_type;
 
     @Lob
     private String content;
@@ -26,12 +26,14 @@ public class Message {
     private LocalDateTime timestamp = LocalDateTime.now();
 
     @ManyToOne
-    @JoinColumn(name = "agency_id")
+    @JoinColumn(name = "agency_id",insertable=false, updatable=false)
     @JsonIgnore
     private Agency agency;
+    private Long agency_id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id",insertable=false, updatable=false)
     @JsonIgnore
     private Customer customer;
+    private Long customer_id;
 }
