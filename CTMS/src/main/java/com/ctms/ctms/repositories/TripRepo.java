@@ -17,9 +17,9 @@ public interface TripRepo extends JpaRepository<Trip,Long> {
 
     List<Trip> findAllByLocation(String location);
 
-    List<Trip> findAllByTripDate(LocalDate tripDate);
-
-    @Query("SELECT p FROM Trip p WHERE p.agency_id = :id")
+    @Query("SELECT p FROM Trip p WHERE p.agency.agencyId = :id")
     List <Trip> findAllByAgency_id(Long id);
+
+    List<Trip> findAllByStartTripDate(LocalDate startTripDate);
 }
 

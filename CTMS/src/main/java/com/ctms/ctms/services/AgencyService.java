@@ -50,14 +50,13 @@ public class AgencyService {
     }
 
     public  Agency getAgencyById(Long id){
-        Agency agency = agencyRepo.findById(id).orElseThrow(() -> new AgencyNotFoundException("Agency not found"));
-        return agency;
+        return agencyRepo.findById(id).orElseThrow(() -> new AgencyNotFoundException("Agency not found"));
     }
 
     public  Agency getAgencyByName(String name){
-        Agency agency = agencyRepo.findByName(name).orElseThrow(() -> new AgencyNotFoundException("Agency not found"));
-        return agency;
+        return agencyRepo.findByName(name).orElseThrow(() -> new AgencyNotFoundException("Agency not found"));
     }
+
     /*
     public User register(User user) {
         if(checkIfUserExist(user.getEmail())) {

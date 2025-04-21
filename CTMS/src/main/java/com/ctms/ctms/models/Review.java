@@ -21,6 +21,7 @@ public class Review {
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TripRating rating;
 
     @Lob
@@ -29,15 +30,19 @@ public class Review {
     @Column(name = "review_date")
     private LocalDateTime reviewDate = LocalDateTime.now();
 
-    @ManyToOne
-    @JoinColumn(name = "trip_id",insertable=false, updatable=false)
-    @JsonIgnore
-    private Trip trip;
-    private Long trip_id;
+    @Lob
+    private String response;
+
+    @Column(name = "response_date")
+    private LocalDateTime responseDate;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id",insertable=false, updatable=false)
+    @JoinColumn(name = "trip_id")
+    @JsonIgnore
+    private Trip trip;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
     @JsonIgnore
     private Customer customer;
-    private Long customer_id;
 }

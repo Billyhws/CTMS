@@ -50,8 +50,7 @@ public class CustomerService {
     }
 
     public  Customer getCustomerById(Long id){
-        Customer customer = customerRepo.findById(id).orElseThrow(() -> new CustomerNotFoundException("Agency not found"));
-        return customer;
+        return customerRepo.findById(id).orElseThrow(() -> new CustomerNotFoundException("Agency not found"));
     }
 
 }

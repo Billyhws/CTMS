@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.List;
 
 @Entity
@@ -35,6 +34,9 @@ public class Agency{
 
     @Column(nullable = false, length = 200)
     private String password;
+
+    @Column(name = "unread_messages_count")
+    private int unreadMessagesCount = 0;
 
     @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL)
     @JsonIgnore

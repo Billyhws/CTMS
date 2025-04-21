@@ -22,7 +22,11 @@ public class AgencyController {
 
     @DeleteMapping("/agency/{id}")
     public ResponseEntity<String> deleteAgencyHandler(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(agencyService.deleteAgency(id), HttpStatus.OK);
+        String response = agencyService.deleteAgency(id);
+        if (response.equals("Not Found")) {
+            return new ResponseEntity<>("Agency not found", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/agencies")
@@ -32,10 +36,13 @@ public class AgencyController {
 
     @PutMapping("/agency/{id}")
     public ResponseEntity<Agency> updateAgencyHandler(@RequestBody() Agency agency, @PathVariable("id") Long id) {
+        if (!agency.getAgencyId().equals(id)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(agencyService.updateAgency(agency,id), HttpStatus.OK);
     }
 
-    @GetMapping("/name/{name}")
+    @GetMapping("/agency/name/{name}")
     public ResponseEntity<Agency> getAgencyByNameHandler(@PathVariable("name") String name){
         return new ResponseEntity<>(agencyService.getAgencyByName(name), HttpStatus.OK);
     }

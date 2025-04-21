@@ -21,7 +21,11 @@ public class CustomerController {
 
     @DeleteMapping("/customer/{id}")
     public ResponseEntity<String> deleteCustomerHandler(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(customerService.deleteCustomer(id), HttpStatus.OK);
+        String response = customerService.deleteCustomer(id);
+        if (response.equals("Not Found")) {
+            return new ResponseEntity<>("Customer not found", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/customers")
@@ -31,6 +35,9 @@ public class CustomerController {
 
     @PutMapping("/customer/{id}")
     public ResponseEntity<Customer> updateCustomerHandler(@RequestBody() Customer customer, @PathVariable("id") Long id) {
+        if (!customer.getId().equals(id)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(customerService.updateCustomer(customer,id), HttpStatus.OK);
     }
 

@@ -9,10 +9,10 @@ import java.util.List;
 @Repository
 public interface ReviewRepo extends JpaRepository<Review,Long> {
 
-    @Query("SELECT p FROM Review p WHERE p.customer_id = :customerId")
+    @Query("SELECT p FROM Review p WHERE p.customer.id = :customerId")
     List<Review> findAllByCustomer_id(Long customerId);
 
-    @Query("SELECT p FROM Review p WHERE p.trip_id = :tripId")
+    @Query("SELECT p FROM Review p WHERE p.trip.tripId = :tripId")
     List<Review> findAllByTrip_id(Long tripId);
 
 }

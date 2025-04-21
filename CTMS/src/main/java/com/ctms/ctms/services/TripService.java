@@ -1,15 +1,11 @@
 package com.ctms.ctms.services;
 
 import com.ctms.ctms.exception.TripNotFoundException;
-import com.ctms.ctms.models.Agency;
 import com.ctms.ctms.models.Trip;
 import com.ctms.ctms.repositories.TripRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,18 +16,22 @@ public class TripService {
 
 
     public Trip addTrip(Trip trip) {
+
         return tripRepo.save(trip);
     }
 
     public Trip updateTrip(Long id,Trip trip) {
         Trip trip1 = tripRepo.findById(id)
                 .orElseThrow(() -> new TripNotFoundException("Trip with ID " + id + " not found"));
+
         trip1.setItinerary(trip.getItinerary());
         trip1.setAvailableSlots(trip.getAvailableSlots());
         trip1.setPrice(trip.getPrice());
-        trip1.setTripDate(trip.getTripDate());
+        trip1.setStartTripDate(trip.getStartTripDate());
+        trip1.setLastTripDate(trip.getLastTripDate());
         trip1.setLocation(trip.getLocation());
-        return tripRepo.save(trip);
+
+        return tripRepo.save(trip1);
     }
 
     public String deleteTrip(Long id) {
@@ -75,7 +75,7 @@ public class TripService {
     }
 
     public List<Trip> getTripsByTripDate(LocalDate date) {
-        List<Trip> trips = tripRepo.findAllByTripDate(date);
+        List<Trip> trips = tripRepo.findAllByStartTripDate(date);
         if (trips.isEmpty()) {
             throw new TripNotFoundException("No trips found on date: " + date);
         }

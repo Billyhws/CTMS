@@ -5,9 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -35,21 +33,23 @@ public class Trip {
     @Column(name = "available_slots")
     private Integer availableSlots;
 
-    @Column(name = "trip_date")
-    private LocalDate tripDate ;
+    @Column(name = "start_trip_date")
+    private LocalDate startTripDate ;
+
+    @Column(name = "last_trip_date")
+    private LocalDate lastTripDate ;
 
     @ManyToOne()
-    @JoinColumn(name = "agency_id",insertable=false, updatable=false)
+    @JoinColumn(name = "agency_id")
     private Agency  agency;
-    private  Long agency_id;
 
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Review> review;
+    private List<Review> reviews;
 
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Booking> booking;
+    private List<Booking> bookings;
 
     // Constructors, Getters, Setters
 

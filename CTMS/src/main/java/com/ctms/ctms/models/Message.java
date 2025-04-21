@@ -2,13 +2,17 @@ package com.ctms.ctms.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "message")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class Message {
 
     @Id
@@ -17,6 +21,7 @@ public class Message {
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private message_type sender_type;
 
     @Lob
@@ -26,14 +31,13 @@ public class Message {
     private LocalDateTime timestamp = LocalDateTime.now();
 
     @ManyToOne
-    @JoinColumn(name = "agency_id",insertable=false, updatable=false)
+    @JoinColumn(name = "agency_id")
     @JsonIgnore
     private Agency agency;
-    private Long agency_id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id",insertable=false, updatable=false)
+    @JoinColumn(name = "customer_id")
     @JsonIgnore
     private Customer customer;
-    private Long customer_id;
+
 }

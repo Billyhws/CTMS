@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface MessageRepo extends JpaRepository<Message,Long> {
 
-    @Query("SELECT p FROM Message p WHERE p.agency_id = :agencyId and p.customer_id= : customerId")
+    @Query("SELECT p FROM Message p WHERE p.agency.agencyId = :agencyId and p.customer.id= : customerId")
     List<Message> findByAgency_idAndCustomer_id(Long customerId,Long agencyId);
 }

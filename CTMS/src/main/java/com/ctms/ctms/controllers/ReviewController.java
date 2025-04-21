@@ -14,9 +14,9 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-    @PostMapping("/reviews")
-    public ResponseEntity<Review> addReviewHandler(@RequestBody Review review) {
-        return new ResponseEntity<>(reviewService.addReview(review), HttpStatus.CREATED);
+    @PostMapping("/reviews/{id}")
+    public ResponseEntity<Review> addReviewHandler(@PathVariable("id") Long id ,@RequestBody Review review) {
+        return new ResponseEntity<>(reviewService.addReview(id,review), HttpStatus.CREATED);
     }
 
     @PutMapping("/review/{id}")
@@ -27,6 +27,13 @@ public class ReviewController {
     @DeleteMapping("/review/{id}")
     public ResponseEntity<String> deleteReviewHandler(@PathVariable("id") Long id){
         return new ResponseEntity<>(reviewService.deleteReview(id), HttpStatus.OK);
+    }
+
+    @PutMapping("/{reviewId}/respond")
+    public ResponseEntity<Review> respondToReview(@PathVariable Long reviewId,
+                                                  @RequestBody String response) {
+        Review updatedReview = reviewService.respondToReview(reviewId, response);
+        return ResponseEntity.ok(updatedReview);
     }
 
     @GetMapping("/trip/reviews/{tripId}")
